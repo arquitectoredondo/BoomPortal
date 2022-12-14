@@ -1,0 +1,9 @@
+@import '../../../../styles/vendors/layouts';
+
+.list-title {
+  .form-label-textfield {
+    @include push-right();
+    width: 400px;
+    background-color: $white;
+  }
+}

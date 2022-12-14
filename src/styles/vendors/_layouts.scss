@@ -1,0 +1,64 @@
+@import "../abstracts/variables";
+@import "../base/typography";
+@import "../abstracts/mixins";
+@import "../vendors/buttons";
+
+.layout-list {
+  flex: 1;
+  @include push-all(8, 12, 8, 12);
+  .list-title {
+    @include push-bottom(10);
+    & > span {
+      @extend .font-xl;
+      color: $black;
+      display: flex;
+      flex: 1;
+    }
+    button {
+      @extend .main-blue-button;
+      min-width: 32px !important;
+      height: 32px !important;
+    }
+  }
+}
+
+.layout-dialog {
+  .MuiDialog-paperScrollPaper {
+    display: inline;
+  }
+
+  .layout-dialog-title {
+    @include pad();
+    background-color: $warm-grey;
+    height: 25px !important;
+    span {
+      @extend .font-s;
+      display: flex;
+      flex: 1;
+      color: $black !important;
+      font-weight: bold !important;
+    }
+  }
+  .layout-dialog-body {
+    @include pad();
+  }
+  .layout-dialog-actions {
+    @include pad();
+    button:first-child {
+      @include push-left();
+      @extend .main-blue-button;
+    }
+
+    button:nth-child(2) {
+      @extend .main-grey-button;
+    }
+  }
+
+  .layout-remove-background-color {
+    button {
+      @extend .main-grey-button;
+      @include push-left();
+      height: 37px;
+    }
+  }
+}

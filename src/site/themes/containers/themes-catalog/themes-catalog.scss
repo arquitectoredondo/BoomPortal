@@ -1,0 +1,20 @@
+@import '../../../../styles/abstracts/mixins';
+@import '../../../../styles/base/typography';
+@import '../../../../styles/abstracts/variables';
+
+.catalogTheme-body {
+  @include pad(8);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  background-color: $warm-grey;
+  width: 100%;
+}
+
+.theme-title {
+  font-size: x-large;
+}
+
+.catalog-header {
+  @include pad-bottom(10);
+}

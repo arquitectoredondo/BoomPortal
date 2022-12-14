@@ -1,0 +1,11 @@
+@import '../../../styles/abstracts/mixins';
+
+.error-default {
+  @include pad(10);
+  & > span {
+    @include pad-top();
+  }
+  .main-blue-button {
+    @include push-top();
+  }
+}

@@ -1,0 +1,85 @@
+@import '../../../../styles/abstracts/mixins';
+@import '../../../../styles/base/typography';
+@import '../../../../styles/abstracts/variables';
+
+.dialog-title {
+  padding-top: 0px;
+}
+.MuiDialogTitle-root {
+  height: 55px !important;
+  padding: 0px;
+  background-color: $warm-grey;
+}
+.MuiTypography-h6 {
+  font-size: 1rem;
+  padding: 0px;
+  font-weight: bold;
+}
+.close-icon {
+  padding-right: 8px;
+  padding-top: 0px;
+}
+.switch-row {
+  padding-top: 20px;
+}
+.dialog-image {
+  height: 100%;
+  width: 100%;
+  margin-top: 25px;
+}
+.add-image-button {
+  margin-right: 25px;
+}
+.selectors {
+  border-radius: 4px;
+  position: relative;
+  padding: 0px;
+  border: solid 0.5px $cold-dark;
+  width: 100%;
+  margin: 0px;
+}
+
+.input-name {
+  @include pad-top(4);
+  width: 550px;
+  .MuiOutlinedInput-input {
+    padding: 6px !important;
+  }
+}
+.input-issn {
+  @include pad-top(4);
+  width: 75% !important;
+  .MuiOutlinedInput-input {
+    padding: 6px !important;
+  }
+}
+.trash-icon-dialog {
+  margin-top: 15px;
+  padding-top: 16px;
+  color: $cold-dark;
+}
+
+.row-title {
+  @include pad-top(4);
+  @include pad-bottom(4);
+}
+
+.input-name-folder {
+  @include pad-top(4);
+  width: 240px;
+
+  .MuiOutlinedInput-input {
+    padding: 7px !important;
+    @include push-left(6);
+  }
+}
+
+.selectors-folder {
+  border-radius: 4px;
+  position: relative;
+  padding: 0px;
+  border: solid 0.5px $cold-dark;
+  width: 240px;
+  @include pad-right(6);
+  margin: 0px;
+}

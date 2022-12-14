@@ -1,0 +1,49 @@
+@import '../abstracts/variables';
+
+.font-xs {
+  font-size: $font-xs;
+}
+
+.font-s {
+  font-size: $font-s;
+}
+
+.font-m {
+  font-size: $font-m;
+}
+
+.font-l {
+  font-size: $font-l;
+}
+
+.font-lg {
+  font-size: $font-lg;
+}
+
+.font-xl {
+  font-size: $font-xl;
+}
+
+.font-xxl {
+  font-size: $font-xxl;
+}
+
+.font-xxxl {
+  font-size: $font-xxxl;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.font-uppercase {
+  text-transform: uppercase;
+}
+
+.font-capitalize {
+  text-transform: capitalize;
+}
+
+.font-capitalize-first::first-letter {
+  text-transform: uppercase;
+}

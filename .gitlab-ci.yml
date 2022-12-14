@@ -1,0 +1,267 @@
+image: alpine:latest
+
+# this enables us to use helm v3, which is in this auto-deploy image
+# it seems helm --force causes issues, lets see if 2.7.0 fixes this
+.auto-deploy:
+  image: "registry.gitlab.com/gitlab-org/cluster-integration/auto-deploy-image/v2-7-0:latest"
+  dependencies: []
+
+variables:
+  DOCKER_DRIVER: overlay2
+  HELM_UPGRADE_EXTRA_ARGS: "--debug"
+  HELM_RELEASE_NAME: "boomportaal-admin"
+  ROLLOUT_RESOURCE_TYPE: deployment
+  ROLLOUT_STATUS_DISABLED: "true"
+  REVIEW_DISABLED: "true"
+  KUBE_BASE_DOMAIN: beta.boomdenhaag.nl
+  DEV_BASE_URL: boomportaal-dev-admin
+  SPRINT_BASE_URL: boomportaal-sprint-admin
+  STAGING_BASE_URL: boomportaal-staging-admin
+  PRODUCTION_BASE_URL: boomportaal-production-admin
+
+stages:
+  - install
+  - test
+  - sonarqube
+  - build
+  - deploy # dummy stage to follow the template guidelines
+  - k8s-deploy
+  - review
+  - dast
+  - staging
+  - canary
+  - production
+  - incremental rollout 10%
+  - incremental rollout 25%
+  - incremental rollout 50%
+  - incremental rollout 100%
+  - performance
+  - cypress
+  - cleanup
+
+cache:
+  paths:
+    - node_modules/
+    - coverage/
+
+install_dependencies:
+  image: node:12.18
+  stage: install
+  script:
+    - npm install
+  artifacts:
+    paths:
+      - node_modules/
+  only:
+    - master
+    - develop
+    - /^release*/
+
+testing:
+  image: node:12.18
+  stage: test
+  script:
+    - npm test -- --coverage --watchAll=false
+    - ls -s
+    - cat coverage/lcov.info
+  artifacts:
+    paths:
+      - coverage/
+  only:
+    - master
+    - develop
+    - /^release*/
+
+sonar:
+  image:
+    name: sonarsource/sonar-scanner-cli:latest
+    entrypoint: [""]
+  variables:
+    SONAR_TOKEN: "2da2a47ff305ca959d0ac0ddf713bbb571af292f"
+    SONAR_HOST_URL: "https://boomportaal-sonarqube.beta.boomdenhaag.nl"
+    GIT_DEPTH: 0
+  stage: sonarqube
+  script:
+    - export BRANCH="$(echo "${CI_COMMIT_BRANCH}" | tr A-Z a-z)"
+    - export CHECK="release"
+    - echo "${BRANCH}" | grep -q "${CHECK}" || export RELEASE="false"
+    - if [ "$RELEASE" != "false" ]; then export BRANCH="release"; fi
+    - export NAME="$HELM_RELEASE_NAME-$BRANCH"
+    - export Upper="$(tr '[:lower:]' '[:upper:]' <<< ${BRANCH:0:1})${BRANCH:1}"
+    - export DISPLAY_NAME="Boom $Upper Admin"
+    - |
+      sonar-scanner -Dsonar.qualitygate.wait=true \
+        -Dsonar.projectKey=${NAME} \
+        -Dsonar.projectName="${DISPLAY_NAME}" \
+        -Dsonar.sources=src \
+        -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info \
+        -Dsonar.exclusions=src/index.tsx,src/serviceWorker.ts,src/core/i18n
+  allow_failure: true
+  only:
+    - master
+    - develop
+    - /^release*/
+
+cypress-dev:
+  image: cypress/base:12.14.1
+  stage: cypress
+  variables:
+    CYPRESS_BASE_URL: https://$DEV_BASE_URL.$KUBE_BASE_DOMAIN
+  script:
+    - npx cypress install
+    - node cypress/script.js
+  allow_failure: true
+  only:
+    refs:
+      - develop
+
+cypress-sprint:
+  image: node:12.18
+  stage: cypress
+  variables:
+    CYPRESS_BASE_URL: https://$SPRINT_BASE_URL.$KUBE_BASE_DOMAIN
+  script:
+    - npx cypress install
+    - node cypress/script.js
+  allow_failure: true
+  only:
+    refs:
+      - /^release*/
+
+include:
+  # - template: Jobs/Build.gitlab-ci.yml  # https://gitlab.com/gitlab-org/gitlab-foss/blob/master/lib/gitlab/ci/templates/Jobs/Build.gitlab-ci.yml
+  - template: Jobs/Deploy.gitlab-ci.yml # https://gitlab.com/gitlab-org/gitlab-foss/blob/master/lib/gitlab/ci/templates/Jobs/Deploy.gitlab-ci.yml
+
+docker-build:
+  stage: build
+  image: "registry.gitlab.com/gitlab-org/cluster-integration/auto-build-image/master:stable"
+  variables:
+    DOCKER_TLS_CERTDIR: ""
+  services:
+    - docker:19.03.5-dind
+  script:
+    - export BRANCH="$(echo "${CI_COMMIT_BRANCH}" | tr A-Z a-z)"
+    - export RELEASE_CHECK="release"
+    - echo "${BRANCH}" | grep -q "${RELEASE_CHECK}" || export RELEASE="false"
+    - export STAGING_CHECK="staging"
+    - echo "${BRANCH}" | grep -q "${STAGING_CHECK}" || export STAGING="false"
+    - export PRODUCTION_CHECK="production"
+    - echo "${BRANCH}" | grep -q "${PRODUCTION_CHECK}" || export PRODUCTION="false"
+    - if [ "$RELEASE" != "false" ]; then export BRANCH="release"; fi
+    - if [ "$STAGING" != "false" ]; then export BRANCH="staging"; fi
+    - if [ "$PRODUCTION" != "false" ]; then export BRANCH="prod"; fi
+    - if [ "$BRANCH" == "develop" ]; then export BRANCH="dev"; fi
+    - export BUILD_TAG=":${BRANCH}"
+    - sed -i 's/${BUILD_TAG}/'$BUILD_TAG'/g' Dockerfile
+    - |
+      if [[ -z "$CI_COMMIT_TAG" ]]; then
+        export CI_APPLICATION_REPOSITORY=${CI_APPLICATION_REPOSITORY:-$CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG}
+        export CI_APPLICATION_TAG=${CI_APPLICATION_TAG:-$CI_COMMIT_SHA}
+      else
+        export CI_APPLICATION_REPOSITORY=${CI_APPLICATION_REPOSITORY:-$CI_REGISTRY_IMAGE}
+        export CI_APPLICATION_TAG=${CI_APPLICATION_TAG:-$CI_COMMIT_TAG}
+      fi
+    - /build/build.sh
+  only:
+    refs:
+      - develop
+      - /^release*/
+      - /^staging*/
+      - /^production*/
+
+develop-deploy:
+  extends: .auto-deploy
+  stage: k8s-deploy
+  variables:
+    HELM_UPGRADE_VALUES_FILE: chart/values-develop.yaml
+  script:
+    - export KUBE_NAMESPACE="boomportaal-develop"
+    - export BUILD_TAG=":dev"
+    - auto-deploy check_kube_domain
+    - auto-deploy download_chart
+    - auto-deploy ensure_namespace
+    - auto-deploy create_secret
+    - auto-deploy deploy
+    - auto-deploy persist_environment_url
+  environment:
+    name: develop
+    url: http://$DEV_BASE_URL.$KUBE_INGRESS_BASE_DOMAIN
+  artifacts:
+    paths: [environment_url.txt]
+  only:
+    refs:
+      - develop
+    kubernetes: active
+
+sprint-deploy:
+  extends: .auto-deploy
+  stage: k8s-deploy
+  variables:
+    HELM_UPGRADE_VALUES_FILE: chart/values-sprint.yaml
+  script:
+    - export KUBE_NAMESPACE="boomportaal-sprint"
+    - export BUILD_TAG=":sprint"
+    - auto-deploy check_kube_domain
+    - auto-deploy download_chart
+    - auto-deploy ensure_namespace
+    - auto-deploy create_secret
+    - auto-deploy deploy
+    - auto-deploy persist_environment_url
+  environment:
+    name: sprint
+    url: http://$SPRINT_BASE_URL.$KUBE_INGRESS_BASE_DOMAIN
+  artifacts:
+    paths: [environment_url.txt]
+  only:
+    refs:
+      - /^release*/
+    kubernetes: active
+
+staging-deploy:
+  extends: .auto-deploy
+  stage: k8s-deploy
+  variables:
+    HELM_UPGRADE_VALUES_FILE: chart/values-staging.yaml
+  script:
+    - export KUBE_NAMESPACE="boomportaal-staging"
+    - export BUILD_TAG=":staging"
+    - auto-deploy check_kube_domain
+    - auto-deploy download_chart
+    - auto-deploy ensure_namespace
+    - auto-deploy create_secret
+    - auto-deploy deploy
+    - auto-deploy persist_environment_url
+  environment:
+    name: staging
+    url: http://$STAGING_BASE_URL.$KUBE_INGRESS_BASE_DOMAIN
+  artifacts:
+    paths: [environment_url.txt]
+  only:
+    refs:
+      - /^staging*/
+    kubernetes: active
+
+production-deploy:
+  extends: .auto-deploy
+  stage: k8s-deploy
+  variables:
+    HELM_UPGRADE_VALUES_FILE: chart/values-production.yaml
+  script:
+    - export KUBE_NAMESPACE="boomportaal-production"
+    - export BUILD_TAG=":prod"
+    - kubectl get ns
+    - auto-deploy check_kube_domain
+    - auto-deploy download_chart
+    - auto-deploy ensure_namespace
+    - auto-deploy create_secret
+    - auto-deploy deploy
+    - auto-deploy persist_environment_url
+  environment:
+    name: production
+    url: http://$PRODUCTION_BASE_URL.$KUBE_INGRESS_BASE_DOMAIN
+  artifacts:
+    paths: [environment_url.txt]
+  only:
+    refs:
+      - /^production*/
+    kubernetes: active

@@ -1,0 +1,119 @@
+@import "../../../../styles/abstracts/variables";
+@import "../../../../styles/abstracts/mixins";
+@import "../../../../styles/base/typography";
+
+%sidebar-main {
+  @include pad-top();
+  background-color: $black;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 64px);
+
+  a {
+    text-decoration: none;
+  }
+
+  a:last-child {
+    @include push-bottom(8);
+  }
+
+  .collapse-button {
+    @include push();
+    display: flex;
+    flex-direction: row-reverse;
+    .MuiIconButton-root {
+      color: $white;
+    }
+  }
+}
+.subNav {
+  @include pad-left(10);
+}
+
+%sidebar-link {
+  margin-left: 6px;
+  div {
+    @include pad();
+    @extend .font-m;
+    @extend .font-bold;
+    display: flex;
+    color: $white;
+    text-decoration: none;
+  }
+
+  span:last-child {
+    @include pad-left();
+    font-weight: normal;
+  }
+
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+.sidebar-body {
+  @extend %sidebar-main;
+  width: 200px;
+  & > div {
+    display: flex;
+    flex-direction: column;
+    & > span {
+      @include pad();
+      @extend .font-m;
+      color: #a7a8a8;
+    }
+  }
+
+  a {
+    @extend %sidebar-link;
+
+    span:first-child {
+      width: 20px;
+    }
+  }
+}
+
+.sidebar-body-collapsed {
+  @extend %sidebar-main;
+  width: 60px;
+  & > div {
+    display: flex;
+    flex-direction: column;
+    & > span {
+      display: none;
+      @include pad();
+      @extend .font-m;
+      color: #a7a8a8;
+    }
+  }
+
+  a {
+    @extend %sidebar-link;
+
+    span:last-child {
+      display: none;
+    }
+  }
+}
+
+.theme-name {
+  color: $cold-dark;
+  display: inline-block;
+  width: 140px;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+}
+
+.selected {
+  background-color: rgba(32, 32, 32, 0.5);
+  border-left: 6px solid $theme-secondary;
+  margin-left: 0px !important;
+}
+.submenu-selected {
+  & > div {
+    & > span {
+      font-weight: 700 !important;
+    }
+  }
+}

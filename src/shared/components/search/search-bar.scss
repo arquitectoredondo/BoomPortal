@@ -1,0 +1,37 @@
+@import '../../../styles/abstracts/variables';
+@import '../../../styles/abstracts/mixins';
+
+.search-card {
+  height: 70px;
+  display: 'flex';
+  flex-direction: 'column';
+
+  width: 100%;
+
+  .MuiOutlinedInput-root {
+    padding: 10px !important;
+  }
+
+  h2 {
+    @include pad-left(8);
+  }
+
+  .MuiInputBase-root {
+    padding-right: 12px !important;
+    background-color: $white;
+  }
+
+  .search-icon {
+    cursor: pointer;
+    opacity: 0.33;
+    size: 3px;
+  }
+}
+.MuiInputLabel-outlined {
+  z-index: 1;
+  transform: none;
+  pointer-events: none;
+}
+.MuiFormLabel-root {
+  line-height: 0px !important;
+}

@@ -1,0 +1,193 @@
+@import "../../../../styles/abstracts/mixins";
+@import "../../../../styles/base/typography";
+@import "../../../../styles/abstracts/variables";
+@import "../../../../styles/vendors/buttons";
+@import "../../../../styles/vendors/form-fields";
+
+.theme-settings {
+  background-color: $warm-grey;
+  @include pad-all(4, 8, 8, 8);
+
+  .settings-header {
+    .header-title {
+      @extend .font-xl;
+    }
+
+    button {
+      @include push-left();
+      @include push-top(0);
+    }
+
+    #back-button {
+      @include push-left(0);
+    }
+  }
+
+  #preview-button {
+    display: none;
+  }
+
+  .main-blue-button {
+    @include push-top(8);
+    @include push-left();
+  }
+
+  .main-red-button {
+    @include push-top(8);
+  }
+
+  .size-helper {
+    @include push-top();
+    @include push-bottom();
+    display: flex;
+    justify-content: center;
+    white-space: pre-line;
+    align-items: center;
+    border-radius: 3px;
+    background-color: $mid-dark;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .preview-image-size {
+    font-size: 12px;
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .file-buttons {
+    button,
+    span {
+      @include push-left();
+      @include push-right();
+      width: 200px !important;
+    }
+  }
+
+  .preview-container {
+    margin-top: 25px;
+    @include push-left(4);
+  }
+
+  .preview-image {
+    max-width: 284px;
+    max-height: 200px;
+  }
+
+  .preview-image-title {
+    text-align: center;
+    font-size: 12px;
+    margin: 4px 0;
+  }
+
+  .preview-image-carousel {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 244px;
+    height: 90px;
+    margin-left: 16px;
+  }
+
+  .permanent-delete {
+    margin-left: 0px !important;
+    background-color: $error !important;
+  }
+
+  .input-name {
+    width: 100%;
+  }
+
+  .input-title {
+    font-weight: 700;
+    margin-bottom: 20px;
+    @include push-top(6);
+  }
+
+  .size-buttons {
+    @include push-left(9);
+    .MuiToggleButton-root {
+      box-sizing: border-box;
+      height: 32.5px;
+      width: 32.5px;
+      border: 0.5px solid #979797;
+      background-color: #d0cfcf;
+    }
+
+    .MuiToggleButton-root.Mui-selected {
+      background-color: #003484;
+      .MuiToggleButton-label {
+        color: $white;
+      }
+    }
+
+    .MuiToggleButton-label {
+      @extend .font-s;
+      @extend .font-bold;
+      color: $black;
+      text-align: center;
+    }
+    .hide-toggle {
+      width: 60px;
+    }
+  }
+
+  .MuiOutlinedInput-input {
+    padding: 6px;
+    background-color: $white;
+  }
+
+  .discription-field {
+    height: 90px !important;
+    margin-left: 0px !important;
+    width: 100%;
+    .MuiOutlinedInput-root {
+      height: 100%;
+      background-color: $white;
+      .MuiOutlinedInput-inputMultiline {
+        height: 75px !important;
+      }
+    }
+  }
+
+  .layout-remove-background-color {
+    button {
+      @extend .main-grey-button;
+      @include push-left();
+      height: 37px;
+    }
+  }
+}
+
+.color-section {
+  .MuiBox-root {
+    & > span {
+      @include push-left();
+    }
+    button {
+      @include push-all(2, 16, 8, 4);
+    }
+
+    .color-button {
+      div {
+        width: 252px;
+        height: 24px;
+      }
+    }
+
+    .twitter-picker {
+      margin-top: -31px;
+      @include push-bottom();
+      @include push-left();
+    }
+  }
+}
+
+.MuiButton-contained.color-button {
+  background-color: $white;
+}
+
+.menu-selector {
+  width: 50%;
+}

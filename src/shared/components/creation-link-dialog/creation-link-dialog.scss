@@ -1,0 +1,9 @@
+@import '../../../styles/abstracts/mixins';
+
+.form-label-textfield {
+  @include push-top();
+}
+
+#remove-button {
+  pointer-events: auto;
+}

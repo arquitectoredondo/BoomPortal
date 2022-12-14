@@ -1,0 +1,242 @@
+@import '../../../styles/abstracts/mixins';
+@import '../../../styles/base/typography';
+@import '../../../styles/abstracts/variables';
+@import '../../../styles/vendors/buttons';
+@import '../../../styles/vendors/form-fields';
+
+.journal-settings-body {
+  @include pad-all(4, 8, 8, 8);
+
+  .main-green-button,
+  .main-red-button,
+  .main-blue-button {
+    @include push-left();
+    // @include push-bottom();
+  }
+  .delete-button {
+    @include push-left(0);
+  }
+
+  .header-settings {
+    @include pad-bottom(10);
+    & > span {
+      @extend .font-xl;
+    }
+  }
+
+  & > span {
+    @include pad-top(10);
+    @extend .font-bold;
+  }
+
+  .MuiTextField-root {
+    width: 100%;
+  }
+  .material-select {
+    width: 50%;
+  }
+
+  .title {
+    font-weight: 700;
+    @include push-bottom(2);
+    @include push-top();
+  }
+
+  & > .MuiBox-root {
+    @include push-top();
+  }
+
+  .database-selector {
+    width: 50%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-bottom: 10px !important;
+  }
+
+  .select-database {
+    border-radius: 4px;
+    position: relative;
+    padding: 0px;
+    border: solid 0.5px $cold-dark;
+    width: 216%;
+    margin: 0px;
+    background-color: $white;
+    min-width: 380px;
+  }
+
+  .select-database-required {
+    border-radius: 4px;
+    position: relative;
+    padding: 0px;
+    border: solid 0.5px $error;
+    width: 167%;
+    background-color: $white;
+    min-width: 380px;
+    margin-bottom: 10px;
+  }
+
+  .backgroundcolor-button {
+    background-color: $white;
+  }
+  .journal-menu-selector {
+    width: 50%;
+  }
+
+  .size-buttons {
+    @include push-left(9);
+    .MuiToggleButton-root {
+      box-sizing: border-box;
+      height: 32.5px;
+      width: 32.5px;
+      border: 0.5px solid #979797;
+      background-color: #d0cfcf;
+    }
+
+    .MuiToggleButton-root.Mui-selected {
+      background-color: #003484;
+      .MuiToggleButton-label {
+        color: $white;
+      }
+    }
+
+    .MuiToggleButton-label {
+      @extend .font-s;
+      @extend .font-bold;
+      color: $black;
+      text-align: center;
+    }
+  }
+
+  .file-buttons {
+    button,
+    span {
+      @include push-left(0);
+      @include push-right();
+      width: 173px !important;
+    }
+  }
+
+  .eans-list {
+    width: 17%;
+  }
+
+  .cover-shadow {
+    @include push-top();
+    @include push-bottom();
+    width: 180px;
+    height: 250px;
+    border-radius: 3px;
+    background-color: $mid-dark;
+
+    .image-size {
+      font-size: 12px;
+      text-align: center;
+      padding-top: 105px;
+      font-weight: 500;
+    }
+  }
+
+  .cover {
+    @include push-top();
+    @include push-bottom();
+    max-width: 180px;
+    max-height: 250px;
+    border-radius: 3px;
+    background-color: $mid-dark;
+    width: 250px;
+  }
+
+  .select-journal {
+    border-radius: 4px;
+    position: relative;
+    padding: 0px;
+    border: solid 0.5px $cold-dark;
+    width: 216%;
+    margin: 0px;
+    background-color: $white;
+    min-width: 380px;
+  }
+
+  .select-journal-required {
+    border-radius: 4px;
+    position: relative;
+    padding: 0px;
+    border: solid 0.5px $error;
+    width: 167%;
+    background-color: $white;
+    min-width: 380px;
+    margin-bottom: 10px;
+  }
+
+  .error-text {
+    color: $error;
+  }
+
+  .MuiNativeSelect-select.MuiNativeSelect-select {
+    padding-right: 24px;
+    padding-left: 15px;
+    color: $cold-dark;
+  }
+  .MuiInputBase-root.MuiInput-root.MuiInput-underline:before {
+    border-bottom: white !important;
+  }
+  .MuiInputBase-root.MuiInput-root.MuiInput-underline:after {
+    border-bottom: white !important;
+  }
+
+  .journal-selector {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-bottom: 10px !important;
+    width: 50%;
+  }
+
+  #preview-button {
+    display: none;
+  }
+
+  .license {
+    width: 100%;
+    @include pad-right(2);
+  }
+
+  .layout-remove-background-color {
+    button {
+      @extend .main-grey-button;
+      @include push-left();
+      height: 37px;
+    }
+  }
+
+  .open-access {
+    @include push-bottom(1);
+    @include push-top(2);
+  }
+}
+.MuiNativeSelect-select.MuiNativeSelect-select.required-selector {
+  color: $error !important;
+}
+
+.color-section {
+  .MuiBox-root {
+    & > span {
+      @include push-left();
+    }
+    button {
+      @include push-all(2, 16, 8, 4);
+    }
+
+    .color-button {
+      div {
+        width: 252px;
+        height: 24px;
+      }
+    }
+
+    .twitter-picker {
+      margin-top: -31px;
+      @include push-bottom();
+      @include push-left();
+    }
+  }
+}

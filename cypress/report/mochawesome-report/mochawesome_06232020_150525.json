@@ -1,0 +1,201 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 6,
+    "passes": 6,
+    "pending": 0,
+    "failures": 0,
+    "start": "2020-06-23T13:04:39.453Z",
+    "end": "2020-06-23T13:05:25.167Z",
+    "duration": 45714,
+    "testsRegistered": 6,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "73d271c0-7472-4f9f-8074-e566f666969e",
+      "title": "",
+      "fullFile": "cypress\\integration\\pages-spec.ts",
+      "file": "cypress\\integration\\pages-spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "29cfd15c-37ba-4ca8-b0fa-eb29ee93e323",
+          "title": "Pages",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should cancel before create page",
+              "fullTitle": "Pages should cancel before create page",
+              "timedOut": null,
+              "duration": 11510,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('#add-button').click();\ncy.get('#page-name').type('cancele2e');\ncy.get('#page-link').type('cancele2e');\ncy.get('#cancel-button').click();\ncy.get('.MuiTableBody-root').should('not.contain.text', 'cancele2e');",
+              "err": {},
+              "uuid": "be1e5222-b4e9-4863-8eec-49b9af013ad0",
+              "parentUUID": "29cfd15c-37ba-4ca8-b0fa-eb29ee93e323",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should create a page",
+              "fullTitle": "Pages should create a page",
+              "timedOut": null,
+              "duration": 5895,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.server();\ncy.createPage();",
+              "err": {},
+              "uuid": "d4751c00-c083-41f3-8bcb-556fe39d5620",
+              "parentUUID": "29cfd15c-37ba-4ca8-b0fa-eb29ee93e323",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should publish > update name and link > revert",
+              "fullTitle": "Pages should publish > update name and link > revert",
+              "timedOut": null,
+              "duration": 8226,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.server();\ncy.createPage();\ncy.fixture('pages').then(function (_a) {\n    var page = _a.page;\n    var pageLabel = page.label;\n    var pageLink = page.link;\n    cy.route('POST', '/boom/services/rest/pagemanagement/v1/publish/*', page).as('publish');\n    cy.get('[data-cy=publish-button').click();\n    cy.wait('@publish').then(function () {\n        page.label = page.label + '-updated';\n        page.link = page.link + '-updated';\n        page.canRevert = true;\n        cy.route('POST', '/boom/services/rest/pagemanagement/v1/update', page).as('update');\n        cy.get('#open-settings-button').click();\n        cy.get('#page-name').type('-updated');\n        cy.get('#page-link').type('-updated');\n        cy.get('#save-button').click();\n        cy.wait('@update').then(function () {\n            cy.get('.title-header').contains(page.label);\n            cy.get('#open-settings-button').click();\n            cy.get('#page-name').should('have.value', page.label);\n            cy.get('#page-link').should('have.value', page.link);\n            cy.get('#close-button').click({ force: true });\n            page.label = pageLabel;\n            page.link = pageLink;\n            cy.route('POST', '/boom/services/rest/pagemanagement/v1/revert/*', page).as('revert');\n            cy.get('#revert-button').click();\n            cy.wait('@revert').then(function () {\n                cy.get('.title-header').contains(page.label);\n                cy.get('#open-settings-button').click();\n                cy.get('#page-name').should('have.value', page.label);\n                cy.get('#page-link').should('have.value', page.link);\n            });\n        });\n    });\n});",
+              "err": {},
+              "uuid": "9b985df8-983e-43a3-994b-f0695063fe1a",
+              "parentUUID": "29cfd15c-37ba-4ca8-b0fa-eb29ee93e323",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should have a correct widget menu",
+              "fullTitle": "Pages should have a correct widget menu",
+              "timedOut": null,
+              "duration": 5219,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.createPage();\ncy.get('.page-details-editor').within(function () {\n    cy.contains('button', 'Add widget').click();\n});\ncy.get('#widget-search').within(function () {\n    cy.get('div > svg').should('have.class', 'fa-search');\n    cy.get('span').should('have.text', 'Search');\n});\ncy.get('#widget-text').within(function () {\n    cy.get('div > svg').should('have.class', 'fa-file-alt');\n    cy.get('span').should('have.text', 'Flat text');\n});",
+              "err": {},
+              "uuid": "ba889b6b-5d7b-429a-a27e-7f1cc942ca35",
+              "parentUUID": "29cfd15c-37ba-4ca8-b0fa-eb29ee93e323",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should close onclick the \"x\"",
+              "fullTitle": "Pages should close onclick the \"x\"",
+              "timedOut": null,
+              "duration": 5024,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.createPage();\ncy.get('.page-details-editor').within(function () {\n    cy.contains('button', 'Add widget').click();\n});\ncy.get('.widget-selector-body').should('exist');\ncy.get('.layout-dialog-title').within(function () {\n    cy.get('#close-button').click();\n});\ncy.get('.widget-selector-body').should('not.exist');",
+              "err": {},
+              "uuid": "ae64b167-031e-4269-aa63-c2f5a0f3a6c8",
+              "parentUUID": "29cfd15c-37ba-4ca8-b0fa-eb29ee93e323",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should create widget text",
+              "fullTitle": "Pages should create widget text",
+              "timedOut": null,
+              "duration": 9439,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.server();\ncy.createPage();\ncy.fixture('pages').then(function (_a) {\n    var page = _a.page, textWidget = _a.textWidget;\n    page.pageWidgets = page.pageWidgets[textWidget];\n    cy.route('POST', '/boom/services/rest/pagemanagement/v1/*', page).as('widget');\n    cy.get('.page-details-editor').within(function () {\n        cy.contains('button', 'Add widget').click();\n    });\n    cy.get('#widget-text').click({ force: true });\n    cy.get('#text-title').type(textWidget.title);\n    cy.get('.DraftEditor-editorContainer').type('Content');\n    cy.get('#save-button').click();\n    cy.wait('@widget');\n    cy.get('.react-grid-item').contains(textWidget.title);\n});",
+              "err": {},
+              "uuid": "b17c9366-53dd-4c22-963e-747a547b040c",
+              "parentUUID": "29cfd15c-37ba-4ca8-b0fa-eb29ee93e323",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "be1e5222-b4e9-4863-8eec-49b9af013ad0",
+            "d4751c00-c083-41f3-8bcb-556fe39d5620",
+            "9b985df8-983e-43a3-994b-f0695063fe1a",
+            "ba889b6b-5d7b-429a-a27e-7f1cc942ca35",
+            "ae64b167-031e-4269-aa63-c2f5a0f3a6c8",
+            "b17c9366-53dd-4c22-963e-747a547b040c"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 45313,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.1.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "./cypress/report/mochawesome-report",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "timestamp": "mmddyyyy_HHMMss"
+      },
+      "version": "5.1.0"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+@import '../../../../styles/abstracts/variables';
+@import '../../../../styles/abstracts/mixins';
+@import '../../../../styles/base/typography';
+
+.header-body {
+  @include pad-right();
+  @include pad-left();
+  background-color: $black;
+  display: flex;
+  height: 48px;
+  color: $white;
+  align-items: center;
+  @extend .font-m;
+  & > div:first-child {
+    @include push-left(8);
+    @extend .font-bold;
+    display: flex;
+    align-items: center;
+  }
+
+  & > div:nth-child(2) {
+    flex: 1;
+    text-align: center;
+    color: #a7a8a8;
+  }
+
+  & > div:nth-child(3) {
+    & > span {
+      @include pad-right(2);
+      @include pad-left(2);
+    }
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .back-button {
+    @include push-left(-6);
+    @include push-right(2);
+    color: $white;
+  }
+
+  .logout {
+    @include push-left(2);
+    @include push-right(2);
+    color: $white;
+  }
+}

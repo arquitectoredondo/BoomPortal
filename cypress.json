@@ -1,0 +1,13 @@
+{
+  "baseUrl": "http://localhost:3000",
+  "supportFile": "cypress/support/index.ts",
+  "reporter": "mochawesome",
+  "reporterOptions": {
+      "reportDir": "mochawesome-report",
+      "overwrite": false,
+      "html": false,
+      "json": true,
+      "timestamp": "mmddyyyy_HHMMss"
+   }
+}
+  

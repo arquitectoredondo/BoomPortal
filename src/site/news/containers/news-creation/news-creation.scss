@@ -1,0 +1,135 @@
+@import '../../../../styles/abstracts/mixins';
+@import '../../../../styles/abstracts/variables';
+@import '../../../../styles/base/typography';
+@import '../../../../styles/vendors/buttons';
+@import '~react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+
+.new-creation-body {
+  background-color: #f5f6f7;
+  @include pad(8);
+  & > span {
+    @extend .font-xl;
+    color: $black;
+  }
+
+
+  .size-helper {
+    @include push-top();
+    @include push-bottom();
+    display: flex;
+    justify-content: center;
+    white-space: pre-line;
+    align-items: center;
+    border-radius: 3px;
+    background-color: $mid-dark;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .preview-image-size {
+    font-size: 12px;
+    text-align: center;
+    font-weight: 500;
+  }
+
+
+  .form-textfield {
+    width: 100%;
+  }
+
+  .title-container {
+    @include push-top();
+  }
+  .calendar-news-input-container {
+    @include push-top();
+    width: 20%;
+  }
+
+  .image-container {
+    @include push-top();
+    & > span {
+      @include pad-left();
+      @extend .font-m;
+    }
+  }
+
+  .date-container {
+    @include push-top();
+    @include push-bottom();
+    .date-picker {
+      width: 20%;
+      @include push-right();
+      &:last-child() {
+        @include push-right(0);
+      }
+      span {
+        color: $black;
+      }
+      .MuiInputBase-root {
+        @include pad(1);
+        @include pad-left(3);
+        border: 1px solid black;
+        border-radius: 4px;
+        background-color: $white;
+      }
+    }
+
+    .rdw-editor-toolbar {
+      background-color: $theme-primary-light;
+      border-radius: 4px;
+    }
+  }
+
+  .editor-container {
+    @include push-top(4);
+    border-radius: 4px;
+  }
+  .rdw-editor-toolbar {
+    background-color: $theme-primary-light;
+    border-radius: 4px;
+    margin-bottom: 0px;
+  }
+  .rdw-editor-main {
+    @include pad();
+    border: 1px solid $black;
+    border-top: 0;
+    background-color: $white;
+    max-height: 450px;
+    overflow-y: scroll;
+  }
+
+  .newsActions {
+    @include push-top();
+    button:first-child {
+      @include push-left();
+      @extend .main-blue-button;
+    }
+
+    button:nth-child(2) {
+      @extend .main-grey-button;
+    }
+  }
+  #add-button {
+    background-color: #2057ab !important;
+    min-width: 32px !important;
+    height: 32px !important;
+    font-family: 'objektiv-mk2', sans-serif !important;
+    color: #ffffff !important;
+    font-weight: bold !important;
+    text-transform: none !important;
+    font-size: 12px !important;
+    margin-left: 8px;
+  }
+  .language-selector span {
+    font-size: 16px;
+    margin-bottom: 0;
+  }
+  .author {
+    margin: 2px 0;
+    span{
+      padding-left: 8px;
+      cursor: pointer;
+    }
+  }
+}

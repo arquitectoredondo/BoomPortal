@@ -1,0 +1,41 @@
+@import '../../../../styles/abstracts/mixins';
+@import '../../../../styles/base/typography';
+@import '../../../../styles/abstracts/variables';
+@import '../../../../styles/vendors/buttons';
+@import '../../../../styles/vendors/form-fields';
+.widget-text-body {
+  @include pad();
+  overflow-y: auto;
+
+  .form-label-textfield.text {
+    height: 128px !important;
+    @include pad-bottom();
+    div {
+      height: 128px !important;
+      @include push-bottom();
+    }
+  }
+  .selected-border {
+    color: $theme-secondary !important;
+  }
+  .unselected-border {
+    color: $cold-dark !important;
+  }
+  .editor-container {
+    @include push-top(4);
+    border-radius: 4px;
+  }
+  .rdw-editor-toolbar {
+    background-color: $theme-primary-light;
+    border-radius: 4px;
+    margin-bottom: 0px;
+  }
+  .rdw-editor-main {
+    @include pad();
+    border: 1px solid $black;
+    border-top: 0;
+    background-color: $white;
+    max-height: 250px;
+    overflow-y: scroll;
+  }
+}

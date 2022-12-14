@@ -1,0 +1,54 @@
+@import '../../../styles/abstracts/mixins';
+@import '../../../styles/base/typography';
+@import '../../../styles/abstracts/variables';
+
+.selectors {
+  border-radius: 4px;
+  position: relative;
+  padding: 0px;
+  border: solid 0.5px $cold-dark;
+  width: 90%;
+  margin: 0px;
+  background-color: $white;
+  min-width: 380px;
+}
+
+.MuiNativeSelect-select.MuiNativeSelect-select {
+  padding-right: 24px;
+  padding-left: 15px;
+  color: $cold-dark;
+}
+.MuiInputBase-root.MuiInput-root.MuiInput-underline:before {
+  border-bottom: white !important;
+}
+.MuiInputBase-root.MuiInput-root.MuiInput-underline:after {
+  border-bottom: white !important;
+}
+
+.years-select {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-bottom: 10px !important;
+}
+
+.publication-item{
+  padding: 10px;
+}
+.edit-title-button {
+  height: 29px;
+  margin-top: 10px !important;
+  & > span {
+    line-height: 0em;
+  }
+}
+
+.trash-icon {
+  color: $cold-dark;
+}
+.title {
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.catalog-header {
+  @include pad-bottom(10);
+}

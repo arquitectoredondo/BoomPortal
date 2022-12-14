@@ -1,0 +1,21 @@
+@import '../../../../styles/abstracts/variables';
+@import '../../../../styles/abstracts/mixins';
+
+.publication-row {
+  & > span {
+    @include pad-top();
+    width: 33%;
+    text-align: left;
+    span {
+      @include push-left();
+      cursor: pointer;
+      color: $cold-dark;
+    }
+  }
+  & > span:first-child {
+    width: 60%;
+  }
+  & > span:last-child {
+    text-align: right;
+  }
+}

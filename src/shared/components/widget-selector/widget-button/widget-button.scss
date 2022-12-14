@@ -1,0 +1,32 @@
+@import '../../../../styles/abstracts/variables';
+@import '../../../../styles/base/typography';
+@import '../../../../styles/abstracts/mixins';
+
+.widget-button {
+  cursor: pointer;
+  @include push();
+  text-align: center;
+  height: 114px;
+  width: 114px;
+  border: 1px solid #979797;
+  border-radius: 3px;
+  background-color: $white;
+  box-shadow: 1px 0 0 0 #eeeeee, 0 1px 2px 0 rgba(0, 0, 0, 0.08),
+    0 1px 0 0 #d9d9d9;
+  span {
+    @include pad-top();
+    @extend .font-m;
+    color: $black;
+  }
+  div {
+    text-align: center;
+    color: #979797;
+  }
+}
+
+.widget-button:hover {
+  box-shadow: 1px 1px 4px 0 $theme-secondary;
+  div {
+    color: rgba($theme-secondary, 0.4);
+  }
+}

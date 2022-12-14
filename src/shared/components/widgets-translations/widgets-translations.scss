@@ -1,0 +1,119 @@
+@import '../../../styles/abstracts/mixins';
+@import '../../../styles/base/typography';
+@import '../../../styles/abstracts/variables';
+@import '../../../styles/vendors/buttons';
+@import '../../../styles/vendors/form-fields';
+
+.widget-translation-form-label-textfield {
+  @include push-top();
+  @include pad-left(8);
+  @include pad-right(8);
+
+  & > span {
+    color: $black;
+    @extend .font-m;
+    @include push-bottom(2);
+  }
+
+  .MuiInputBase-root,
+  &.MuiInputBase-root {
+    margin-top: 0;
+    background-color: $white;
+  }
+
+  .MuiOutlinedInput-input {
+    padding: 6px 14px;
+  }
+
+  &.Mui-disabled {
+    opacity: 0.4;
+  }
+}
+
+.clipboard-icon {
+  border: 1px solid #f1f1f1;
+  padding: 5px;
+  min-width: 25px;
+  height: 20px;
+  border-radius: 2px;
+  margin: 0 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background: white;
+  text-transform: capitalize;
+}
+
+#remove-button {
+  pointer-events: auto;
+}
+.widget-translation-editor-container {
+  @include push-top(4);
+  @include pad-left(8);
+  @include pad-right(8);
+  border-radius: 4px;
+}
+.rdw-editor-toolbar {
+  background-color: $theme-primary-light !important;
+  border-radius: 4px !important;
+  margin-bottom: 0px !important;
+}
+.rdw-editor-main {
+  @include pad();
+  border: 1px solid $black;
+  border-top: 0;
+  background-color: $white;
+  max-height: 250px;
+  overflow-y: scroll;
+}
+
+.MuiDialog-paperScrollPaper {
+  overflow: overlay !important;
+}
+
+.scrollbar-dialog {
+  *::-webkit-scrollbar {
+    width: 24px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    background-clip: padding-box;
+    border-radius: 50px;
+    border: 9px solid rgba(0, 0, 0, 0);
+  }
+}
+.layout-translations-language-indicator {
+  @include pad(5);
+  @include pad-left(5);
+  height: 15px !important;
+  background-color: #F1F5F9 !important;
+  span {
+    @extend .font-s;
+    display: flex;
+    flex: 1;
+    // font-weight: bold !important;
+  }
+}
+.layout-translations-title {
+  @include pad(5);
+  @include pad-left(15);
+  height: 25px !important;
+  span {
+    @extend .font-xl;
+    display: flex;
+    flex: 1;
+    color: $black !important;
+    font-weight: bold !important;
+  }
+}
+.widget-translations-title {
+  @include pad-left(5);
+  @include pad-top(5);
+  span {
+    @include pad-left(3);
+    @extend .font-l;
+    color: $black !important;
+    font-weight: bold !important;
+  }
+}

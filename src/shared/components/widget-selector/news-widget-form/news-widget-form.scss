@@ -1,0 +1,34 @@
+@import '../../../../styles/abstracts/mixins';
+@import '../../../../styles/base/typography';
+@import '../../../../styles/abstracts/variables';
+@import '../../../../styles/vendors/buttons';
+@import '../../../../styles/vendors/form-fields';
+.news-widget-body {
+  @include pad();
+  overflow-y: auto;
+
+  .selected-border {
+    color: $theme-secondary !important;
+  }
+  .switch-options {
+    @include pad-top(2);
+  }
+
+  .unselected-border {
+    color: $cold-dark !important;
+  }
+
+  .form-label-textfield .color-picker-button {
+    width: 220px;
+    background-color: $white;
+  }
+
+  .form-label-textfield.text {
+    height: 128px !important;
+    @include pad-bottom();
+    div {
+      height: 128px !important;
+      @include push-bottom();
+    }
+  }
+}

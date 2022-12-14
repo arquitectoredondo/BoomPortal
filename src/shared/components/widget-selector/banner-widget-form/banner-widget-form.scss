@@ -1,0 +1,75 @@
+@import '../../../../styles/abstracts/mixins';
+@import '../../../../styles/base/typography';
+@import '../../../../styles/abstracts/variables';
+@import '../../../../styles/vendors/buttons';
+@import '../../../../styles/vendors/form-fields';
+
+.widget-banner-body {
+  @include pad();
+  overflow-y: auto;
+  .form-label-textfield.text {
+    height: 128px !important;
+    @include pad-bottom();
+    div {
+      height: 128px !important;
+      @include push-bottom();
+    }
+  }
+  .color-section {
+    max-width: 500px;
+    @include push-bottom(6);
+    .MuiBox-root button {
+      margin-bottom: 0px;
+      margin-right: 0px;
+      background-color: $white;
+    }
+    .twitter-picker {
+      margin-top: 0px !important;
+    }
+  }
+  .form-label-textfield.first-button {
+    @include pad-right(8);
+  }
+
+  .size-helper {
+    @include push-top();
+    @include push-bottom();
+    display: flex;
+    justify-content: center;
+    white-space: pre-line;
+    align-items: center;
+    border-radius: 3px;
+    background-color: $mid-dark;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .preview-image-size {
+    font-size: 12px;
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .MuiButton-contained.color-dialog-button {
+    background-color: $white;
+  }
+  .MuiButtonGroup-groupedTextHorizontal {
+    border-right: none !important;
+  }
+  .MuiChip-root {
+    background-color: $white !important;
+    border-radius: 0px;
+    width: 40px;
+  }
+  .selected-border {
+    color: $theme-secondary !important;
+  }
+  .unselected-border {
+    color: $cold-dark !important;
+  }
+}
+
+.MuiPaper-root.MuiMenu-paper.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded {
+  max-height: 300px;
+}

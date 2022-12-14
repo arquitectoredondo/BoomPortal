@@ -1,0 +1,45 @@
+@import "../../../../styles/abstracts/variables";
+@import "../../../../styles/abstracts/mixins";
+@import "../../../../styles/base/typography";
+@import "../../../../styles/vendors/buttons";
+
+.prevent-language-dialog {
+  .MuiDialog-paperScrollPaper {
+    display: inline;
+  }
+
+  .prevent-language-dialog-title {
+    @include pad();
+    background-color: $warm-grey;
+    height: 25px !important;
+    span {
+      @extend .font-s;
+      display: flex;
+      flex: 1;
+      color: $black !important;
+      font-weight: bold !important;
+    }
+  }
+  .prevent-language-dialog-content {
+    // span {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    a {
+      color:blue
+    }
+    // }
+    @include pad();
+  }
+  .prevent-language-dialog-actions {
+    @include pad();
+    button:first-child {
+      @include push-left();
+      @extend .main-blue-button;
+    }
+
+    button:nth-child(2) {
+      @extend .main-grey-button;
+    }
+  }
+}

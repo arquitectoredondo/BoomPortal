@@ -1,0 +1,41 @@
+// SPACING
+$pad-margin-multiplier: 4px;
+
+$theme-primary: #003484;
+$theme-primary-light: #2057ab;
+$theme-primary-dark: #00255d;
+$theme-secondary: #eb6b0a;
+$theme-secondary-light: #ee9552;
+$theme-secondary-dark: #b96526;
+
+// THEME
+:root {
+  --theme-primary: $theme-primary;
+  --theme-primary-light: $theme-primary-light;
+  --theme-primary-dark: $theme-primary-dark;
+  --theme-secondary: $theme-secondary;
+  --theme-secondary-light: $theme-secondary-light;
+  --theme-secondary-dark: $theme-secondary-dark;
+}
+
+// SURFACE COLORS
+$black: #313131;
+$white: #ffffff;
+$warm-grey: #eaeaea;
+$mid-dark: #d0cfcf;
+$cold-dark: #a7a8a8;
+
+// STATUS COLORS
+$info: #6236ff;
+$error: #e63a3a;
+$dialog-error: #5ca65c;
+
+// FONT-SIZES
+$font-xs: 10px;
+$font-s: 12px;
+$font-m: 14px;
+$font-l: 16px;
+$font-lg: 20px;
+$font-xl: 24px;
+$font-xxl: 30px;
+$font-xxxl: 34px;

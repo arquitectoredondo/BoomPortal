@@ -1,0 +1,12 @@
+@import '../../../../styles/abstracts/variables';
+
+.confirm-dialog {
+  .MuiDialogTitle-root {
+    height: auto !important;
+    text-align: center;
+  }
+  .MuiDialogActions-root {
+    justify-content: center;
+    height: 64px;
+  }
+}

@@ -1,0 +1,55 @@
+@import '../../../styles/abstracts/mixins';
+@import '../../../styles/base/typography';
+@import '../../../styles/abstracts/variables';
+
+.menu {
+  .drag-item {
+    @include push-bottom();
+    border-radius: 3px;
+    border: 1px solid #979797;
+    .MuiIconButton-label {
+      color: #242a42 !important;
+    }
+
+    .MuiTypography-root {
+      @include push-left();
+    }
+  }
+
+  .error-text {
+    @include push-top(2);
+    color: $error;
+  }
+
+  .homepage-item {
+    @include pad(3);
+    @extend .drag-item;
+  }
+
+  .homepage-required {
+    @extend .homepage-item;
+    border: 1px solid $error;
+    .MuiIconButton-label {
+      color: $error !important;
+    }
+  }
+
+  .new-item {
+    @include push-top(-4);
+    border-radius: 3px;
+    border: 1px solid #979797;
+    opacity: 0.4;
+    .MuiIconButton-label {
+      color: #242a42 !important;
+    }
+
+    .MuiTypography-root {
+      opacity: 0.4;
+      @include push-left();
+    }
+  }
+  
+  .disabled-item {
+    display: none;
+  }
+}

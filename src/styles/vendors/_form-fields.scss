@@ -1,0 +1,70 @@
+@import '../abstracts/variables';
+@import '../base/typography';
+@import '../abstracts/mixins';
+
+%form-field {
+  .MuiInputBase-root,
+  &.MuiInputBase-root {
+    height: 32px !important;
+    margin-top: 0;
+    background-color: $white;
+  }
+
+  .MuiOutlinedInput-input {
+    padding: 6px 14px;
+  }
+
+  &.Mui-disabled {
+    opacity: 0.4;
+  }
+}
+
+%form-field-label {
+  color: $black;
+  @extend .font-m;
+  @include push-bottom(2);
+}
+
+.form-textfield {
+  @extend %form-field;
+}
+
+.form-selectfield {
+  @extend %form-field;
+}
+
+.form-label-textfield {
+  & > span {
+    @extend %form-field-label;
+  }
+  & > span.title {
+    font-weight: bold;
+  }
+  @extend .form-textfield;
+}
+
+.form-label-selectfield {
+  & > span {
+    @extend %form-field-label;
+  }
+  .MuiFormLabel-root {
+    transform: translate(14px, 16px) scale(1);
+  }
+  @extend .form-selectfield;
+}
+
+.form-checkbox {
+  .MuiIconButton-label {
+    color: $theme-primary !important;
+  }
+
+  .MuiTouchRipple-rippleVisible {
+    color: $theme-primary !important;
+  }
+}
+
+.form-autocomplete {
+  .MuiAutocomplete-input  {
+    padding: 0 !important;
+  }
+}

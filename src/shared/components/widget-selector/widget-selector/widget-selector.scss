@@ -1,0 +1,16 @@
+@import '../../../../styles/abstracts/variables';
+@import '../../../../styles/base/typography';
+@import '../../../../styles/abstracts/mixins';
+
+.widget-selector-body {
+  @include pad();
+}
+.widget-selector-body-last {
+  @include pad();
+  &:after {
+    content: '';
+    @include push();
+    height: 114px;
+    width: 114px;
+  }
+}

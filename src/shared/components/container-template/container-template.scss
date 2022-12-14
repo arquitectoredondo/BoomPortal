@@ -1,0 +1,16 @@
+@import '../../../styles/abstracts/mixins';
+
+.body {
+  display: flex;
+  flex: 1;
+  .loading {
+    @include pad(10);
+  }
+
+  .empty-catalog {
+    @include pad(10);
+    span {
+      @include pad-top(6);
+    }
+  }
+}

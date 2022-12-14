@@ -1,0 +1,61 @@
+@import "../../../../styles/abstracts/mixins";
+@import "../../../../styles/abstracts/variables";
+@import "../../../../styles/base/typography";
+@import "../../../../styles/vendors/buttons";
+
+.news-details {
+  @include pad(12);
+  .news-detail-title {
+    @include push-bottom();
+    & > span {
+      @extend .font-xl;
+      flex: 1;
+      color: $black;
+    }
+
+    button {
+      @include push-left();
+      max-height: 33.6px;
+    }
+
+    #revert-button {
+      @extend .main-red-button;
+    }
+
+    #edit-button {
+      @extend .main-blue-button;
+    }
+
+    #preview-button {
+      @extend .main-blue-button;
+    }
+
+    #publish-button {
+      @extend .main-green-button;
+    }
+  }
+
+  .img-cover {
+    height: 148px;
+    width: 100%;
+  }
+
+  .date-row {
+    @include push-bottom(8);
+    span {
+      @extend .font-l;
+      color: $black;
+    }
+  }
+
+  .taxonomy-title {
+    @include push-top();
+    @include push-bottom();
+    @extend .font-l;
+    @extend .font-bold;
+  }
+
+  .form-textfield {
+    width: 100%;
+  }
+}

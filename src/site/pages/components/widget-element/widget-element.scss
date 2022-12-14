@@ -1,0 +1,25 @@
+@import "../../../../styles/abstracts/variables";
+@import "../../../../styles/abstracts/mixins";
+
+.widget-element {
+  height: 100%;
+  .widget-header {
+    @include pad(2);
+    background-color: $warm-grey;
+    .icon {
+      @include push-right();
+      @include push-left();
+      color: $cold-dark;
+    }
+  }
+
+  .widget-body {
+    overflow: hidden;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  .text-widget-preview {
+    height: 100%;
+    overflow: hidden;
+  }
+}

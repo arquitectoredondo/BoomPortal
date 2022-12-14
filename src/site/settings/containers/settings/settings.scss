@@ -1,0 +1,148 @@
+@import '../../../../styles/abstracts/mixins';
+@import '../../../../styles/base/typography';
+@import '../../../../styles/abstracts/variables';
+@import '../../../../styles/vendors/buttons';
+@import '../../../../styles/vendors/form-fields';
+
+.settings-body {
+  @include pad-all(4, 8, 8, 8);
+
+  .main-green-button,
+  .main-red-button,
+  .main-blue-button {
+    @include push-left();
+    // @include push-bottom();
+  }
+  #preview-button {
+    display: none;
+  }
+  .header-settings {
+    @include pad-bottom(10);
+    & > span {
+      @extend .font-xl;
+    }
+  }
+
+  & > span {
+    @include pad-top(10);
+    @extend .font-bold;
+  }
+
+  .MuiTextField-root,
+  .material-select {
+    width: 50%;
+  }
+
+  & > .MuiBox-root {
+    @include push-top();
+  }
+
+  .favicon {
+    @include push-bottom();
+    @include push-top();
+    @include push-right(2);
+    width: 42px;
+    height: 40px;
+    border-radius: 3px;
+    background-color: $mid-dark;
+  }
+
+  .favicon-image-size {
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .logo {
+    @include push-top();
+    @include push-bottom();
+    display: flex;
+    white-space: pre-line;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    background-color: $mid-dark;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .logo-image-size {
+    font-size: 12px;
+    text-align: center;
+    font-weight: 500;
+  }
+
+  #main-color,
+  #secondary-color,
+  #menu-main {
+    @include push-left();
+  }
+
+  .color-section {
+    .MuiBox-root {
+      & > span {
+        @include push-left();
+      }
+      button {
+        @include push-all(2, 16, 8, 4);
+      }
+
+      .color-button {
+        div {
+          width: 252px;
+          height: 24px;
+        }
+      }
+
+      .twitter-picker {
+        margin-top: -31px;
+        @include push-bottom();
+        margin-left: 0;
+      }
+    }
+  }
+
+  .menu-selector {
+    width: 50%;
+  }
+
+  .file-buttons {
+    button,
+    span {
+      @include push-left(0);
+      @include push-right();
+      width: 173px !important;
+    }
+  }
+  .fontSize {
+    font-size: 14px;
+  }
+  .related-publications > div {
+    margin-top: 5px;
+    margin-left: 178px;
+  }
+  .videos > div {
+    margin-top: 5px;
+    margin-left: 186px;
+  }
+  .available-editions > div {
+    margin-top: 5px;
+    margin-left: 110.1px;
+  }
+  .eLearning > div {
+    margin-top: 5px;
+    margin-left: 156.1px;
+  }
+  .group-access > div {
+    margin-top: 5px;
+    margin-left: 140.2px;
+  }
+  .fullTextSearch > div {
+    margin-top: 5px;
+    margin-left: 125px;
+  }
+  .language-selector > div {
+    margin-top: 5px;
+    margin-left: 103px;
+  }
+}

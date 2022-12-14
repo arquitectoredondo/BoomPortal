@@ -1,0 +1,73 @@
+@import './variables';
+
+// Paddings
+
+@mixin pad($n: 4) {
+  padding: $n * $pad-margin-multiplier;
+}
+
+@mixin pad-top($n: 4) {
+  padding-top: $n * $pad-margin-multiplier;
+}
+
+@mixin pad-right($n: 4) {
+  padding-right: $n * $pad-margin-multiplier;
+}
+
+@mixin pad-bottom($n: 4) {
+  padding-bottom: $n * $pad-margin-multiplier;
+}
+
+@mixin pad-left($n: 4) {
+  padding-left: $n * $pad-margin-multiplier;
+}
+
+@mixin pad-all($a: 4, $b: 4, $c: 4, $d: 4) {
+  padding: $a * $pad-margin-multiplier $b * $pad-margin-multiplier $c *
+    $pad-margin-multiplier $d * $pad-margin-multiplier;
+}
+
+// Margin
+
+@mixin push($n: 4) {
+  margin: $n * $pad-margin-multiplier;
+}
+
+@mixin push-top($n: 4) {
+  margin-top: $n * $pad-margin-multiplier;
+}
+
+@mixin push-right($n: 4) {
+  margin-right: $n * $pad-margin-multiplier;
+}
+
+@mixin push-bottom($n: 4) {
+  margin-bottom: $n * $pad-margin-multiplier;
+}
+
+@mixin push-left($n: 4) {
+  margin-left: $n * $pad-margin-multiplier;
+}
+
+@mixin push-all($a: 4, $b: 4, $c: 4, $d: 4) {
+  margin: $a * $pad-margin-multiplier $b * $pad-margin-multiplier $c *
+    $pad-margin-multiplier $d * $pad-margin-multiplier;
+}
+
+// Dividers
+
+@mixin divider-top($d: 1) {
+  border-top: $d * 1px solid $white-grey-dark;
+}
+
+@mixin divider-right($d: 1) {
+  border-right: $d * 1px solid $white-grey-dark;
+}
+
+@mixin divider-bottom($d: 1) {
+  border-bottom: $d * 1px solid $white-grey-dark;
+}
+
+@mixin divider-left($d: 1) {
+  border-left: $d * 1px solid $white-grey-dark;
+}

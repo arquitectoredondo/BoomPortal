@@ -1,0 +1,13 @@
+@import '../../../styles/abstracts/variables';
+.revert-dialog {
+  .MuiDialogActions-root {
+    padding: 16px !important;
+  }
+  .MuiDialogContent-root {
+    padding: 0 50px !important;
+  }
+  .MuiDialogContentText-root {
+    font-family: 'objektiv-mk2', sans-serif !important;
+    color: $black;
+  }
+}

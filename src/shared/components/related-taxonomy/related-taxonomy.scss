@@ -1,0 +1,33 @@
+@import '../../../styles/abstracts/mixins';
+@import '../../../styles/vendors/form-fields';
+
+.taxonomy-row {
+  @include push-top();
+  .MuiInputBase-root {
+    @include push-right();
+    width: 100%;
+    @extend .form-selectfield;
+  }
+  span {
+    cursor: pointer;
+    color: $cold-dark;
+  }
+
+  .add-enabled {
+    cursor: pointer;
+    color: $cold-dark;
+  }
+
+  .add-disabled {
+    cursor: auto;
+    color: $mid-dark;
+  }
+  .active-taxonomy {
+    background-color: $white !important;
+    opacity: 0.8 !important;
+    color: $black !important;
+    svg {
+      color: transparent;
+    }
+  }
+}

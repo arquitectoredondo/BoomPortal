@@ -1,0 +1,6 @@
+@import '../../../../styles/abstracts/variables';
+@import '../../../../styles/abstracts/mixins';
+.eye-icon {
+  color: $mid-dark;
+  @include push-left(4);
+}

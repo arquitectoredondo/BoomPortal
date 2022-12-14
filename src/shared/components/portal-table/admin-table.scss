@@ -1,0 +1,40 @@
+@import '../../../styles/abstracts/variables';
+@import '../../../styles/abstracts/mixins';
+@import '../../../styles/base/typography';
+
+.admin-table {
+  box-shadow: 3px 3px 3px 0 rgba(35, 35, 35, 0.2) !important;
+  .MuiTableHead-root {
+    background-color: $theme-primary-light;
+    .MuiTableCell-root {
+      @extend .font-bold;
+      @extend .font-s;
+      color: $white;
+    }
+  }
+
+  .MuiTableBody-root {
+    .MuiTableRow-root {
+      cursor: pointer;
+      .MuiTableCell-root:first-child {
+        @extend .font-bold;
+      }
+      .MuiTableCell-root:last-child {
+        opacity: 0.4;
+        span:first-child {
+          @include push-right(8);
+        }
+      }
+    }
+
+    .MuiTableRow-root.admin-table-row-locked {
+      .MuiTableCell-body {
+        color: $cold-dark;
+      }
+    }
+
+    .MuiTableRow-root:nth-child(even) {
+      background-color: rgba(133, 133, 133, 0.1);
+    }
+  }
+}

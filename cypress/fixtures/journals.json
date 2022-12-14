@@ -1,0 +1,25 @@
+{
+  "create":{"name": "e2etestJournal"},
+  "journal":{
+    "uuid":"5d76379576e22dfb9145362426a6b37d",
+    "name":"e2etestJournal",
+    "canRevert":true,
+    "visibility":true,
+    "openAccess":false,
+    "colour":"#fcb900",
+    "menuItems":[{"id":"6636b6fe85e1437d94f44fda55f6660b","label":"news1","pageId":null,"type":1,"folder":null},{"id":"7ca51a4022e34611ba65fe1ec5df8bd6","label":"news2","pageId":null,"type":1,"folder":null}]
+  },
+  "journalRaw":{
+    "uuid":"5d76379576e22dfb9145362426a6b37d",
+    "name":"e2etestJournal",
+    "canRevert":false,
+    "visibility":false,
+    "openAccess":false,
+    "colour":null,
+    "menuItems":[]
+  },
+  "list":[
+    {"uuid":"5d76379576e22dfb9145362426a6b37d","name":"e2etestRawJournal","editedBy":"admin","publicationDate":null,"canRevert":false,"visibility":false,"openAccess":false},
+    {"uuid":"683ee67f6b8c4491a42deaacdb1a34a2","name":"e2etestJournal","editedBy":"admin","publicationDate":"2020-06-17T18:59:23.260+0000","canRevert":false,"visibility":true,"openAccess":false}
+  ]
+}

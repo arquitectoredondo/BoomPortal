@@ -1,0 +1,11 @@
+@import '../../../../styles/abstracts/mixins';
+
+.form-label-selectfield,
+.form-label-textfield {
+  @include push-top();
+}
+.form-label-selectfield.form-label-selectfolder {
+  margin-top: 0;
+  width: 200px;
+  margin-left: 8px;
+}

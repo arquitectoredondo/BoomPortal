@@ -1,0 +1,22 @@
+.status-bar {
+  .alert-message {
+    margin-bottom: 16px;
+    position: relative;
+    display: block;
+    top: 0;
+    .MuiAlert-message {
+      font-family: 'objektiv-mk2', sans-serif !important;
+      color: #ffffff !important;
+      font-weight: bold !important;
+      font-size: 12px !important;
+    }
+    .MuiAlert-icon {
+      padding: 4px 0;
+      font-size: 26px;
+      opacity: 1;
+    }
+  }
+  .dialog-open {
+    z-index: 20;
+  }
+}

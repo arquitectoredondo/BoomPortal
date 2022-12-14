@@ -1,0 +1,19 @@
+@import '../../../../styles/vendors/form-fields';
+@import '../../../../styles/abstracts/mixins';
+
+.news-body {
+  .domain-selector {
+    @include push-all(0, 4, 0, 4);
+    width: 20%;
+    height: 32px;
+  }
+
+  .form-label-textfield {
+    @include push-right();
+    width: 30%;
+  }
+
+  .checkbox-label {
+    @extend .font-m;
+  }
+}

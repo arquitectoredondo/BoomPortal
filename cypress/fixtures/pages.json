@@ -1,0 +1,18 @@
+{
+  "page":{
+    "id":"f42dd552026f40c9a246d3ef15d58b28",
+    "label":"e2etestPage",
+    "createdBy":"admin",
+    "creationDate":"2020-06-18T15:18:55.346+0000",
+    "link":"e2etestPage",
+    "pageWidgets":[],
+    "visibility":false,
+    "canRevert":false,
+    "parentUuid":"74f888e9bb0b4367a275e4f28b9859ce"
+  },
+  "textWidget":{"uuid":"08754ed37b284a58bf3865959d356022","widgetType":5,"x":0,"y":0,"h":1,"w":1,"minH":1,"minW":1,"borderTop":false,"borderRight":false,"borderBottom":false,"borderLeft":false,"title":"TextWidgeeeet","text":"<p>Content</p>\n"},
+  "list":[
+    {"id":"7c89951978ce4bc6b76c3db94b0e5814","label":"home","createdBy":"admin","creationDate":"2020-06-15T21:46:04.739+0000","link":"home","visibility":true,"canRevert":false,"parentUuid":"74f888e9bb0b4367a275e4f28b9859ce"},
+    {"id":"f42dd552026f40c9a246d3ef15d58b28","label":"e2etestPage","createdBy":"admin","creationDate":"2020-06-18T15:18:55.346+0000","link":"e2etestPage","visibility":false,"canRevert":false,"parentUuid":"74f888e9bb0b4367a275e4f28b9859ce"}
+  ]
+}

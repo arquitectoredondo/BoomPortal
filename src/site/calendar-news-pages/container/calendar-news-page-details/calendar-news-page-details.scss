@@ -1,0 +1,60 @@
+@import "../../../../styles/abstracts/mixins";
+@import "../../../../styles/abstracts/variables";
+@import "../../../../styles/base/typography";
+@import "../../../../styles/vendors/buttons";
+@import "../../../../styles/vendors/react-grid";
+
+.page-details {
+  @include push(8);
+  .page-details-header {
+    @include pad-bottom(8);
+    button:not(.MuiIconButton-root) {
+      @include push-left();
+    }
+
+    .main-green-button,
+    .main-red-button,
+    .main-blue-button {
+      @include push-left();
+      // @include push-bottom();
+    }
+    .title-header {
+      @extend .font-xl;
+      color: $black;
+    }
+  }
+  .page-details-editor {
+    @include pad();
+    background-color: #d8d8d8;
+
+    & > .MuiBox-root {
+      .addIcon {
+        @include push-right(2);
+        color: rgba($black, 0.4);
+      }
+    }
+    & > .MuiBox-root:first-child {
+      @include pad();
+      background-color: $black;
+      border-radius: 3px;
+      color: $white;
+      @extend .font-bold;
+      & > .MuiBox-root:first-child {
+        font-size: 18px;
+      }
+      span:last-child {
+        @include pad-left();
+        @include push-left();
+        border-left: 1px solid $white;
+      }
+    }
+
+    button {
+      font-size: 14px !important;
+    }
+
+    #preview-button {
+      display: none;
+    }
+  }
+}

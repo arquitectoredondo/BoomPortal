@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 2,
+    "pending": 0,
+    "failures": 1,
+    "start": "2020-06-23T13:03:56.617Z",
+    "end": "2020-06-23T13:04:29.757Z",
+    "duration": 33140,
+    "testsRegistered": 3,
+    "passPercent": 66.66666666666666,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "2f5c74c5-6165-4198-a7fd-3a64689a356f",
+      "title": "",
+      "fullFile": "cypress\\integration\\news-spec.ts",
+      "file": "cypress\\integration\\news-spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "1a4d6be0-1b7e-4b98-8308-fc1f7b00be37",
+          "title": "News",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should cancel before create a new",
+              "fullTitle": "News should cancel before create a new",
+              "timedOut": null,
+              "duration": 14937,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('#add-button').click();\ncy.get('#new-title').type('canceledNew');\ncy.get('#picker1').clear().type('11/05/2020');\ncy.get('#picker2').clear().type('11/05/2020');\ncy.get('#picker3').clear().type('11/05/2020');\ncy.get('.rdw-editor-main').type('content');\ncy.get('#cancel-button').click();\ncy.get('.MuiTableBody-root').should('not.contain.text', 'canceledNew');",
+              "err": {},
+              "uuid": "77101a63-925a-4874-951d-e7b6d99a2e10",
+              "parentUUID": "1a4d6be0-1b7e-4b98-8308-fc1f7b00be37",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should create a new",
+              "fullTitle": "News should create a new",
+              "timedOut": null,
+              "duration": 10211,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.server();\ncy.fixture('news')\n    .then(function (_a) {\n    var create = _a.create;\n    cy.route('POST', '/boom/services/rest/newsmanagement/v1', create).as('news');\n    cy.get('#add-button').click();\n    cy.get('#save-button').should('be.disabled');\n    cy.get('#new-title').type(create.title);\n    cy.get('#picker1').clear().type('11/05/2020');\n    cy.get('#picker2').clear().type('11/05/2020');\n    cy.get('#picker3').clear().type('11/05/2020');\n    cy.get('.rdw-editor-main').type('descriptionHere');\n    cy.get('#save-button').click();\n    cy.wait('@news').its('status').should('equal', 200);\n});",
+              "err": {},
+              "uuid": "c3c235a5-8ed7-41da-8491-62ee55322b3f",
+              "parentUUID": "1a4d6be0-1b7e-4b98-8308-fc1f7b00be37",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should have a proper formated list",
+              "fullTitle": "News should have a proper formated list",
+              "timedOut": null,
+              "duration": 7443,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.fixture('news').then(function (_a) {\n    var list = _a.list;\n    cy.get('.admin-table > tbody').contains('#admin-table-row', list[0].title).within(function () {\n        cy.get('td').eq(0).should('contain', list[0].title);\n        cy.get('td').eq(1).should('contain', 'admin');\n        if (list[0].publicationDate && list[0].canRevert) {\n            cy.get('td').eq(3).should('contain', 'Published');\n        }\n        else {\n            cy.get('td').eq(3).should('contain', 'Modified');\n        }\n        cy.get('[data-icon=eye]');\n    });\n    cy.get('.admin-table > tbody').contains('#admin-table-row', list[1].title).within(function () {\n        cy.get('td').eq(0).should('contain', list[0].title);\n        cy.get('td').eq(1).should('contain', 'admin');\n        if (list[0].publicationDate && list[1].canRevert) {\n            cy.get('td').eq(3).should('contain', 'Published');\n        }\n        else {\n            cy.get('td').eq(3).should('contain', 'Modified');\n        }\n        cy.get('[data-icon=eye-slash]');\n    });\n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying: expected '<td.MuiTableCell-root.MuiTableCell-body>' to contain 'admin'",
+                "estack": "AssertionError: Timed out retrying: expected '<td.MuiTableCell-root.MuiTableCell-body>' to contain 'admin'\n    at Context.eval (http://localhost:3000/__cypress/tests?p=cypress\\integration\\news-spec.ts:78:36)",
+                "diff": null
+              },
+              "uuid": "e89b5ee4-5c37-4604-bbda-7ac440e4dfa1",
+              "parentUUID": "1a4d6be0-1b7e-4b98-8308-fc1f7b00be37",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "77101a63-925a-4874-951d-e7b6d99a2e10",
+            "c3c235a5-8ed7-41da-8491-62ee55322b3f"
+          ],
+          "failures": [
+            "e89b5ee4-5c37-4604-bbda-7ac440e4dfa1"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 32591,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.1.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "./cypress/report/mochawesome-report",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "timestamp": "mmddyyyy_HHMMss"
+      },
+      "version": "5.1.0"
+    }
+  }
+}

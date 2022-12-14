@@ -1,0 +1,19 @@
+@import '../../../../styles/abstracts/mixins';
+@import '../../../../styles/base/typography';
+@import '../../../../styles/abstracts/variables';
+@import '../../../../styles/vendors/buttons';
+@import '../../../../styles/vendors/form-fields';
+
+.form-label-selectfield,
+.form-label-textfield {
+  @include push-top();
+}
+
+.trash-icon-dialog {
+  margin-top: 15px;
+  size: 'sm';
+}
+
+.form-label-selectfield {
+  min-width: 200px;
+}

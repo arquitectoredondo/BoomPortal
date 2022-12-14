@@ -1,0 +1,56 @@
+@import '../abstracts/variables';
+@import '../base/typography';
+
+%main-button {
+  font-family: 'objektiv-mk2', sans-serif !important;
+  color: $white !important;
+  font-weight: bold !important;
+  text-transform: none !important;
+  font-size: 12px !important;
+  min-width: 108px !important;
+  &.Mui-disabled {
+    opacity: 0.4 !important;
+  }
+}
+
+.main-green-button {
+  @extend %main-button;
+  background-color: $dialog-error !important;
+  &:hover {
+    background-color: $dialog-error !important;
+  }
+}
+
+.main-red-button {
+  @extend %main-button;
+  background-color: $error !important;
+  &:hover {
+    background-color: $error !important;
+  }
+}
+
+.main-blue-button {
+  @extend %main-button;
+  background-color: $theme-primary-light !important;
+  &:hover {
+    background-color: $theme-primary-light !important;
+  }
+}
+
+.main-grey-button {
+  @extend %main-button;
+  background-color: $mid-dark !important;
+  &:hover {
+    background-color: $mid-dark !important;
+  }
+}
+
+.main-transparent-button {
+  @extend %main-button;
+  color: $black !important;
+  font-weight: normal !important;
+  background-color: transparent !important;
+  &:hover {
+    background-color: transparent !important;
+  }
+}
