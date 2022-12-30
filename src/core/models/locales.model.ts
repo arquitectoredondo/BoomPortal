@@ -1,4 +1,4 @@
-import { Resource } from 'i18next';
+import { Resource } from "i18next";
 
 // Object passed to i18n must have i18next Resource properties.
 // Extending Resource we can define a common interface for all our locales to translate.
@@ -28,6 +28,7 @@ export interface I18nLocale extends Resource {
       translations: string;
       AllWidgets: string;
       MaxMenuItems7: string;
+      AddColumn: string;
     };
     placeholders: {
       searchPublications: string;
@@ -135,10 +136,13 @@ export interface I18nLocale extends Resource {
       removePortal: string;
       deleteMessage: string;
       menuItemTitle: string;
+      footerItemTitle: string;
       menuItemController: string;
       menuItemTheme: string;
       menuItemPage: string;
       menuItemLabel: string;
+      footerItemLabel: string;
+      footerItemType: string;
       menuItemNews: string;
       menuEntries: {
         pages: string;
@@ -150,6 +154,12 @@ export interface I18nLocale extends Resource {
         calendarNews: string;
         persons: string;
       };
+      footerEntries: {
+        link: string;
+        page: string;
+        email: string;
+        phone: string;
+      };
       relatedPublications: string;
       catalogAsHomePage: string;
       videos: string;
@@ -158,6 +168,7 @@ export interface I18nLocale extends Resource {
       groupAccess: string;
       fullTextSearch: string;
       languageSelector: string;
+      footerColumns: string;
       hidden: string;
       visible: string;
     };

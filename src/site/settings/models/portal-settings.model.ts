@@ -1,8 +1,10 @@
-import { Language } from '../../../shared/models/language.model';
+import { Language } from "../../../shared/models/language.model";
 import {
   HeaderMenu,
   MenuHomePage,
-} from '../../../shared/models/menuItem.model';
+} from "../../../shared/models/menuItem.model";
+
+import { FooterColumn } from "../../../shared/models/footer.model";
 
 export interface PortalSettings {
   id: string;
@@ -32,4 +34,6 @@ export interface PortalSettings {
   showLanguageSelector: boolean;
   preview?: boolean;
   languages: Language[];
+
+  footer: FooterColumn[];
 }

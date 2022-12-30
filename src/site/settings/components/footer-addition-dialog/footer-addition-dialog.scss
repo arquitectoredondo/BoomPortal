@@ -1,0 +1,64 @@
+@import "../../../../styles/abstracts/mixins";
+
+.form-label-selectfield,
+.form-label-textfield {
+  @include push-top();
+}
+.form-label-selectfield.form-label-selectfolder {
+  margin-top: 0;
+  margin-left: 8px;
+}
+.layout-dialog {
+  width: 765px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.icon-dragg {
+  padding-top: 4px;
+  opacity: 0.3;
+  height: 0.9em;
+  margin-right: 9px;
+}
+/* .last-item {
+  margin-top: -20px !important;
+}
+.new-item {
+  border-radius: 3px;
+  border: 1px solid #979797;
+  height: 2em;
+}
+
+
+.drag-item {
+  border-bottom: solid 1px rgb(230, 221, 221);
+}
+
+.box {
+  margin: 10px 5px 10px 0;
+}
+
+.box-3 {
+  margin-right: 17px;
+}
+
+.label-text {
+  margin-bottom: 5px;
+}
+
+.box-label,
+.box-3 {
+  margin-top: 15px;
+}
+.select-type {
+  height: 2em;
+}
+.box-type {
+  margin-top: 15px;
+}
+.disabled {
+  color: rgb(183, 174, 174);
+}
+.disabled-border {
+  border: 1px solid rgb(183, 174, 174);
+}
+ */

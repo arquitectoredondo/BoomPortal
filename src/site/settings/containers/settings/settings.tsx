@@ -38,8 +38,11 @@ import {
   publishPortalSettings,
 } from "../../services/settings.service";
 import MenuAdditionDialog from "../../components/menu-addition-dialog/menu-addition-dialog";
+import FooterAdditionDialog from "../../components/footer-addition-dialog/footer-addition-dialog";
 import { useNotOnMountEffect } from "../../../../shared/services/utils";
 import MenuSelector from "../../../../shared/components/menu-selector/menu-selector";
+/* import footer selector */
+import FooterSelector from "../../../../shared/components/footer-selector/footer-selector";
 import {
   HeaderMenu,
   MenuHeaderItem,
@@ -71,6 +74,7 @@ export function Settings(props: SettingsProps): JSX.Element {
   let history = useHistory();
   let { portalUuid } = useParams<{ portalUuid: string }>();
   const [addMenuDialog, setAddMenuDialog] = useState<boolean>(false);
+  const [addFooterDialog, setAddFooterDialog] = useState<boolean>(false);
   const [settings, setSettings] = useState<PortalSettings | undefined>(
     props.portalSettings
   );
@@ -88,10 +92,15 @@ export function Settings(props: SettingsProps): JSX.Element {
   const [showSecondaryColor, setShowSecondaryColor] = useState<boolean>(false);
   const [showMenuMainColor, setShowMenuMainColor] = useState<boolean>(false);
   const [editingMenuItem, setEditingMenuItem] = useState<boolean>(false);
+  const [editingFooterItem, setEditingFooterItem] = useState<boolean>(false);
   const [menuItemToEdit, setMenuItemToEdit] = useState<MenuHeaderItem>();
+  const [footerItemToEdit, setFooterItemToEdit] = useState<any>();
   const [isHomepageEdit, setIsHomepageEdit] = useState<boolean>(false);
+  const [isFooterpageEdit, setIsFooterpageEdit] = useState<boolean>(false);
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
   const [allowLanguageSwitch, setAllowLanguageSwitch] = useState<boolean>(true);
+  /* Seteo de estado de footers */
+  const [footers, setFooters] = useState<any[]>([]);
   React.useEffect(() => {
     props.loadPortalSettings();
     props.resetThemeSettings();
@@ -151,6 +160,12 @@ export function Settings(props: SettingsProps): JSX.Element {
       setEditingMenuItem(true);
     }
   }, [menuItemToEdit?.label]);
+  useNotOnMountEffect(() => {
+    if (footerItemToEdit?.columnTitle) {
+      setAddFooterDialog(true);
+      setEditingFooterItem(true);
+    }
+  }, [footerItemToEdit?.columnTitle]);
   React.useEffect(() => {
     setOpen(props.error);
   }, [props.error]);
@@ -210,6 +225,7 @@ export function Settings(props: SettingsProps): JSX.Element {
         .catch(() => props.loadPortalSettingsFailure());
     }
   };
+
   const revertChanges = () => {
     if (settings) {
       props.savePortalSettings(settings);
@@ -269,6 +285,16 @@ export function Settings(props: SettingsProps): JSX.Element {
     result.splice(endIndex, 0, removed);
     saveMenu(result);
   };
+  const reorderFooterMenu = (
+    list: any,
+    startIndex: number,
+    endIndex: number
+  ) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+    /* saveMenu(result); */
+  };
   const removeMenuItem = (id: string) => {
     if (settings) {
       setSettings({
@@ -286,6 +312,10 @@ export function Settings(props: SettingsProps): JSX.Element {
   const selectHomepage = (item: any | undefined) => {
     setIsHomepageEdit(true);
     item ? setMenuItemToEdit(item) : setAddMenuDialog(true);
+  };
+  const selectFooterpage = (item: any | undefined) => {
+    setIsFooterpageEdit(true);
+    item ? setFooterItemToEdit(item) : setAddFooterDialog(true);
   };
   const handleAddMenuItem = (menuItem: MenuHeaderItem) => {
     setMenuItemToEdit(undefined);
@@ -310,6 +340,51 @@ export function Settings(props: SettingsProps): JSX.Element {
       );
       let copy = settings.menuItems;
       copy.splice(index, 1, menuItem);
+      const editSettings: PortalSettings = {
+        ...settings,
+        menuItems: copy,
+      };
+      // props.loadPortalSettings();
+      saveDraftPortalSettings(editSettings).then((result: any) => {
+        setSettings(result.data);
+        props.savePortalSettings(editSettings);
+        props.loadPortalSettingsSuccess(result.data);
+      });
+    }
+  };
+  const handleAddFooterItem = (footerItem: any) => {
+    setFooterItemToEdit(undefined);
+    setAddFooterDialog(false);
+    setEditingFooterItem(false);
+    if (isFooterpageEdit && footerItem) {
+      handleChanges("homepage", footerItem);
+    }
+    setIsFooterpageEdit(false);
+    if (
+      footerItem &&
+      footerItem.id === undefined &&
+      settings &&
+      !isFooterpageEdit
+    ) {
+      setSettings({
+        ...settings,
+        menuItems: [
+          ...(settings?.menuItems ? settings.menuItems : []),
+          footerItem,
+        ],
+      });
+    }
+    if (
+      footerItem &&
+      footerItem.id !== undefined &&
+      settings &&
+      !isFooterpageEdit
+    ) {
+      let index = settings.menuItems.findIndex(
+        (item) => item.id === footerItem.id
+      );
+      let copy = settings.menuItems;
+      copy.splice(index, 1, footerItem);
       const editSettings: PortalSettings = {
         ...settings,
         menuItems: copy,
@@ -358,6 +433,7 @@ export function Settings(props: SettingsProps): JSX.Element {
       />
     );
   });
+
   return (
     <ContainerTemplate
       loading={props.loading}
@@ -1008,6 +1084,35 @@ export function Settings(props: SettingsProps): JSX.Element {
             {t("settings.visible")}
           </div>
         </Box>
+        <span>{t("settings.footerColumns")}</span>
+        <Box display="flex" flexDirection="row" alignItems="center">
+          <FooterSelector
+            homepage={settings?.homepage} /* 
+            handleChanges={handleChanges} */
+            footers={footers}
+            onReorderItems={reorderFooterMenu}
+            /* onDeleteItem={removeMenuItem}*/
+            onAddItem={() => setAddFooterDialog(true)}
+            /* onEditItem={editMenuItem}  */
+            onSelectFooterpage={selectFooterpage}
+          />
+          {addFooterDialog && (
+            <FooterAdditionDialog
+              open={addFooterDialog}
+              isHomepage={isFooterpageEdit}
+              portalUuid={portalUuid}
+              onCloseDialog={handleAddFooterItem}
+              footerItemToEdit={
+                editingFooterItem ? footerItemToEdit : undefined
+              }
+              setFooterItemToEdit={
+                editingFooterItem ? setFooterItemToEdit : undefined
+              }
+              onAddItem={() => setAddFooterDialog(true)}
+            />
+          )}
+        </Box>
+
         <span>{t("settings.removePortal")}</span>
         <Box>
           <Tooltip

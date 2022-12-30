@@ -70,6 +70,7 @@ export function getPages(
     }
   );
 }
+
 export function getAllPages(parentUuid: string | undefined): Promise<any> {
   return axios.get(
     `${process.env.REACT_APP_BASE_URL}/boom/services/rest/pagemanagement/v1/listAllPages/${parentUuid}`

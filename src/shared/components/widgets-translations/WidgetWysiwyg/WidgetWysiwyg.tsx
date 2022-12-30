@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Button,
@@ -8,16 +8,16 @@ import {
   DialogContentText,
   DialogTitle,
   TextField,
-} from '@material-ui/core';
-import { Editor } from 'react-draft-wysiwyg';
-import { EditorState, convertToRaw, ContentState } from 'draft-js';
-import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs';
-import { widgetPayloadProp } from '../widgets-translations';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClipboard } from '@fortawesome/free-solid-svg-icons';
-import '../../widgets-translations/widgets-translations.scss';
-import { useTranslation } from 'react-i18next';
+} from "@material-ui/core";
+import { Editor } from "react-draft-wysiwyg";
+import { EditorState, convertToRaw, ContentState } from "draft-js";
+import draftToHtml from "draftjs-to-html";
+import htmlToDraft from "html-to-draftjs";
+import { widgetPayloadProp } from "../widgets-translations";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClipboard } from "@fortawesome/free-solid-svg-icons";
+import "../../widgets-translations/widgets-translations.scss";
+import { useTranslation } from "react-i18next";
 
 export const WidgetWysiwyg = ({
   i,
@@ -105,7 +105,7 @@ export const WidgetWysiwyg = ({
             reader.readAsDataURL(file);
             let img = new Image();
             reader.onload = function () {
-              img.src = typeof reader.result == 'string' ? reader.result : '';
+              img.src = typeof reader.result == "string" ? reader.result : "";
               resolve({
                 data: {
                   link: img.src,
@@ -116,23 +116,23 @@ export const WidgetWysiwyg = ({
 
         let value = editorState[ln]
           ? draftToHtml(convertToRaw(editorState[ln].getCurrentContent())) ===
-            '<p></p>\n'
-            ? ''
+            "<p></p>\n"
+            ? ""
             : draftToHtml(convertToRaw(editorState[ln].getCurrentContent()))
-          : '';
+          : "";
         let requiredFieldValue = editorState[requiredLanguage]
           ? draftToHtml(
               convertToRaw(editorState[requiredLanguage].getCurrentContent())
-            ) === '<p></p>\n'
-            ? ''
+            ) === "<p></p>\n"
+            ? ""
             : draftToHtml(
                 convertToRaw(editorState[requiredLanguage].getCurrentContent())
               )
-          : '';
+          : "";
 
         let rules = validationRules(ln, value, requiredFieldValue);
         let requiredMark =
-          (ln === requiredLanguage || rules.type === 2) && required ? '*' : '';
+          (ln === requiredLanguage || rules.type === 2) && required ? "*" : "";
         let error = rules.error;
         let helperText = rules.helperText;
         let validationType = rules.type;
@@ -152,16 +152,16 @@ export const WidgetWysiwyg = ({
                 style={
                   error
                     ? {
-                        color: 'red',
-                        fontSize: '12px',
-                        display: 'block',
-                        height: '5px',
+                        color: "red",
+                        fontSize: "12px",
+                        display: "block",
+                        height: "5px",
                       }
                     : {
-                        fontSize: '12px',
-                        color: 'gray',
-                        display: 'block',
-                        height: '5px',
+                        fontSize: "12px",
+                        color: "gray",
+                        display: "block",
+                        height: "5px",
                       }
                 }
               >{`${helperText}`}</span>
@@ -170,12 +170,12 @@ export const WidgetWysiwyg = ({
                 style={
                   value
                     ? {
-                        display: 'block',
-                        top: '-50px',
-                        visibility: 'hidden',
-                        height: '1px',
+                        display: "block",
+                        top: "-50px",
+                        visibility: "hidden",
+                        height: "1px",
                       }
-                    : { display: 'block', top: '-50px', height: '1px' }
+                    : { display: "block", top: "-50px", height: "1px" }
                 }
                 value={value}
                 onInvalid={(e: any) => {
@@ -197,11 +197,11 @@ export const WidgetWysiwyg = ({
             <span
               style={
                 error
-                  ? { color: 'red', fontSize: '12px' }
-                  : { fontSize: '12px', color: 'gray' }
+                  ? { color: "red", fontSize: "12px" }
+                  : { fontSize: "12px", color: "gray" }
               }
             >{`${label} (${ln.toUpperCase()})${requiredMark}`}</span>
-            {ln === 'nl' && (
+            {ln === "nl" && (
               <div>
                 <Dialog
                   className="copy-dialog"
@@ -211,16 +211,16 @@ export const WidgetWysiwyg = ({
                   aria-describedby="alert-dialog-description"
                 >
                   <DialogTitle id="alert-dialog-title">
-                    {t('pages.widgetTranslations.copyTitle')}
+                    {t("pages.widgetTranslations.copyTitle")}
                   </DialogTitle>
                   <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                      {t('pages.widgetTranslations.copyAlert')}
+                      {t("pages.widgetTranslations.copyAlert")}
                     </DialogContentText>
                   </DialogContent>
                   <DialogActions>
                     <Button onClick={handleClose}>
-                      {t('pages.widgetTranslations.disagree')}
+                      {t("pages.widgetTranslations.disagree")}
                     </Button>
                     <Button
                       onClick={() => {
@@ -253,7 +253,7 @@ export const WidgetWysiwyg = ({
                       }}
                       autoFocus
                     >
-                      {t('pages.widgetTranslations.agree')}
+                      {t("pages.widgetTranslations.agree")}
                     </Button>
                   </DialogActions>
                 </Dialog>
@@ -262,22 +262,22 @@ export const WidgetWysiwyg = ({
 
             <Editor
               wrapperStyle={
-                error ? { border: '2px solid red', borderRadius: '6px' } : {}
+                error ? { border: "2px solid red", borderRadius: "6px" } : {}
               }
               editorState={editorState[ln]}
               onEditorStateChange={(evt: any) => handleEditorChange(evt, ln)}
               onContentStateChange={(evt: any) => handleContentChange(i, ln)}
               toolbarCustomButtons={
-                ln === 'nl' ? [<CustomOption />] : undefined
+                ln === "nl" ? [<CustomOption />] : undefined
               }
               toolbar={{
                 options: [
-                  'inline',
-                  'blockType',
-                  'list',
-                  'link',
-                  'embedded',
-                  'image',
+                  "inline",
+                  "blockType",
+                  "list",
+                  "link",
+                  "embedded",
+                  "image",
                 ],
                 image: {
                   urlEnabled: true,
@@ -286,16 +286,16 @@ export const WidgetWysiwyg = ({
                   uploadCallback: uploadCallBack,
                   previewImage: true,
                   inputAccept:
-                    'image/gif,image/jpeg,image/jpg,image/png,image/svg',
+                    "image/gif,image/jpeg,image/jpg,image/png,image/svg",
                   alt: { present: true, mandatory: false },
                   defaultSize: {
-                    height: 'auto',
-                    width: '500',
+                    height: "auto",
+                    width: "500",
                   },
                 },
                 inline: {
                   inDropdown: false,
-                  options: ['bold', 'italic', 'underline'],
+                  options: ["bold", "italic", "underline"],
                 },
               }}
             />
